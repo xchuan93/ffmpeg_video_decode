@@ -1,4 +1,4 @@
-# ffmpeg_decode
+# ffmpeg_video_decode
 
 ### 1 ：初始化AVFormatContext
 ### 2 ：使用avformat_find_stream_info将文件和AVFormatContext关联起来
