@@ -140,13 +140,11 @@
     CVPixelBufferLockBaseAddress(pixelBuffer,0);
     unsigned char *yDestPlane = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
     
-    // Here y_ch0 is Y-Plane of YUV(NV12) data.
     unsigned char *y_ch0 = buffer;
     unsigned char *y_ch1 = buffer + w * h;
     memcpy(yDestPlane, y_ch0, w * h);
     unsigned char *uvDestPlane = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
     
-    // Here y_ch1 is UV-Plane of YUV(NV12) data.
     memcpy(uvDestPlane, y_ch1, w * h/2);
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
     
@@ -154,14 +152,12 @@
         NSLog(@"Unable to create cvpixelbuffer %d", result);
     }
     
-    // CIImage Conversion
     CIImage *coreImage = [CIImage imageWithCVPixelBuffer:pixelBuffer];
     
     CIContext *MytemporaryContext = [CIContext contextWithOptions:nil];
     CGImageRef MyvideoImage = [MytemporaryContext createCGImage:coreImage
                                                        fromRect:CGRectMake(0, 0, w, h)];
     
-    // UIImage Conversion
     UIImage *Mynnnimage = [[UIImage alloc] initWithCGImage:MyvideoImage
                                                      scale:1.0
                                                orientation:UIImageOrientationRight];
